@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Page pour creer un compte User
+Route::get('/register/user', [AuthController::class, 'createUserAccount'])->name('register.user');
+// Route d'enregistrement d'un User
+Route::post('/create/user', [AuthController::class, 'storeUser'])->name('create.user');
+
+// Page pour creer un compte Association
+Route::get('/register/association', [AuthController::class, 'createAssociationAccount'])->name('register.Association');
+// Route d'enregistrement Association
+Route::post('/create/association', [AuthController::class, 'storeAssociation'])->name('create.Association');
