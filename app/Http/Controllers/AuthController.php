@@ -26,12 +26,26 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (Auth::guard('association')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('welcome');
+        $association = Association::where('email', $request->email)->first();
+
+        if ($request->status === 'user') {
+            if (Auth::attempt($credentials)) {
+
+                $request->session()->regenerate();
+                return redirect()->route('welcome');
+            }
+            return back();
+        } else {
+
+            if ($association && Hash::check($request->password, $association->password)) {
+                $request->session()->regenerate();
+                return redirect()->route('welcome');
+            } else {
+                return back();
+            }
         }
-        return back();
     }
+
 
     /**
      * Show the form for creating a new resource.
