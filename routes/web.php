@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,8 @@ Route::post('/authentification', [AuthController::class, 'authentification'])->n
 Route::get('/welcome', function(){
     return view('welcome');
 })->middleware('auth')->name('welcome');
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/login');
+});
