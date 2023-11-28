@@ -23,3 +23,12 @@ Route::post('/create/user', [AuthController::class, 'storeUser'])->name('create.
 Route::get('/register/association', [AuthController::class, 'createAssociationAccount'])->name('register.Association');
 // Route d'enregistrement Association
 Route::post('/create/association', [AuthController::class, 'storeAssociation'])->name('create.Association');
+
+// Page de Login
+Route::get('/login', [AuthController::class, 'login'])->name('login.authentification');
+Route::post('/authentification', [AuthController::class, 'authentification'])->name('login.authentification');
+
+// Page Welcome
+Route::get('/welcome', function(){
+    return view('welcome');
+})->middleware('auth')->name('welcome');
