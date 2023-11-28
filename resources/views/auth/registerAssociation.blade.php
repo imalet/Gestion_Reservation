@@ -26,8 +26,12 @@
                         <label for="name" class="block text-sm font-medium leading-5  text-gray-700">Association
                             Name</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
+<<<<<<< HEAD
                             <input id="name" name="name" placeholder="" type="text" required
                                 value=""
+=======
+                            <input id="name" name="name" placeholder="" type="text" required value=""
+>>>>>>> feature/login
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
 
                             <div class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -44,8 +48,12 @@
                     <div class="mt-6">
                         <label for="slogan" class="block text-sm font-medium leading-5  text-gray-700">Slogan</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
+<<<<<<< HEAD
                             <input id="slogan" name="slogan" placeholder="" type="text" required
                                 value=""
+=======
+                            <input id="slogan" name="slogan" placeholder="" type="text" required value=""
+>>>>>>> feature/login
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
 
                             <div class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -62,8 +70,12 @@
                     <div class="mt-6">
                         <label for="logo" class="block text-sm font-medium leading-5  text-gray-700">Logo</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
+<<<<<<< HEAD
                             <input id="logo" name="logo" placeholder="" type="file" required
                                 value=""
+=======
+                            <input id="logo" name="logo" placeholder="" type="file" required value=""
+>>>>>>> feature/login
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
 
                             <div class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -77,6 +89,42 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
+=======
+                    <div class="mt-6">
+                        <label for="email" class="block text-sm font-medium leading-5  text-gray-700">Email</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input id="email" name="email" placeholder="" type="email" required value=""
+                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+
+                            <div class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label for="password" class="block text-sm font-medium leading-5  text-gray-700">Password</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input id="password" name="password" placeholder="" type="password" required value=""
+                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+
+                            <div class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+>>>>>>> feature/login
 
                     <div class="mt-6">
                         <span class="block w-full rounded-md shadow-sm">

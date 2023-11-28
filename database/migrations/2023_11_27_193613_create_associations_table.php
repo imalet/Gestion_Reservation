@@ -16,6 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('slogan');
             $table->string('logo');
+<<<<<<< HEAD
+=======
+            $table->string('email');
+            $table->string('password');
+            $table->string('remember_token')->nullable();
+            $table->enum('status',['association'])->default('association');
+>>>>>>> feature/login
             $table->timestamps();
         });
     }

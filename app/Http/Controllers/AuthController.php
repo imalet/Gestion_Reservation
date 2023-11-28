@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Association;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\loginRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -16,6 +18,42 @@ class AuthController extends Controller
     {
         //
     }
+
+    /**
+     * Show the login page.
+     */
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    /**
+     * Show the login page.
+     */
+    public function authentification(loginRequest $request)
+    {
+        $credentials = $request->validated();
+
+        $association = Association::where('email', $request->email)->first();
+
+        if ($request->status === 'user') {
+            if (Auth::attempt($credentials)) {
+
+                $request->session()->regenerate();
+                return redirect()->route('welcome');
+            }
+            return back();
+        } else {
+
+            if ($association && Hash::check($request->password, $association->password)) {
+                $request->session()->regenerate();
+                return redirect()->route('welcome');
+            } else {
+                return back();
+            }
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -60,6 +98,7 @@ class AuthController extends Controller
 
         $fileName = time() . '.' . $request->logo->extension();
         
+
         $image = $request->file('logo')->storeAs(
             'logo',
             $fileName,
@@ -70,6 +109,8 @@ class AuthController extends Controller
         $newUser->name = $request->name;
         $newUser->slogan = $request->slogan;
         $newUser->logo = $image;
+        $newUser->email = $request->email;
+        $newUser->password = Hash::make($request->password);
 
         $newUser->save();
 
