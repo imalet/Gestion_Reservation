@@ -8,7 +8,7 @@
 </head>
 <body>
     @foreach ($evenements as $evenement)
-        <a href="{{ route('evenement.detail',['evenement'=>$evenement->id]) }}">{{ $evenement->libelle }}</a>
+        <a href="{{ route('evenement.detail',['evenement'=>$evenement->id]) }}">{{ $evenement->libelle }}</a> <br>
     @endforeach
 </body>
 </html>

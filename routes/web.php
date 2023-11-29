@@ -47,5 +47,14 @@ Route::post('/store/evenement', [EvenementController::class, 'store'])->middlewa
 
 // Page presentatin qui list les evenements
 Route::get('/evenement/liste', [EvenementController::class, 'index'])->name('evenement.list');
-// Page presentatin qui list les evenements
+
+// Page presentation detail d'un evenements
 Route::get('/evenement/detail/{evenement}', [EvenementController::class, 'show'])->name('evenement.detail');
+
+// Formulaire de Modification d'un evenement
+Route::get('/evenement/{evenement}', [EvenementController::class, 'edit'])->name('evenement.edit');
+// Route::get('/evenement/modifier/{evenement}', [EvenementController::class, 'edit'])->name('modifier');
+// Modification d'un Evenement
+Route::post('/evenement/modifier/{evenement}', [EvenementController::class, 'update'])->name('evenement.update');
+// Supprimer d'un Evenement
+Route::get('/evenement/modifier/{evenement}', [EvenementController::class, 'destroy'])->name('evenement.destroy');
