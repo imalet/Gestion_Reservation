@@ -35,8 +35,10 @@ class AuthController extends Controller
         $credentials = $request->validated();
 
         if (Auth::guard('association')->attempt($credentials)) {
+           
             return redirect()->route('welcome');
         } elseif (Auth::guard('web')->attempt($credentials)) {
+    
             return redirect()->route('welcome');
         } else {
             dd("Bad");

@@ -1,1 +1,1 @@
-<h1>Mon Ami {{ Auth::guard('web')->user()->status }}</h1>
+<h1>Mon Ami {{ Auth::guard('association')->user()->status }}</h1>

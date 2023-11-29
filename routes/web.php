@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EvenementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +33,19 @@ Route::post('/authentification', [AuthController::class, 'authentification'])->n
 // Page Welcome
 Route::get('/welcome', function(){
     return view('welcome');
-})->middleware('auth:web')->name('welcome');
+})->middleware('auth:association')->name('welcome');
 
 Route::get('/logout', function(){
     Auth::guard('association')->logout();
     return redirect('/login');
 });
+
+// Formulaire Ajout d'un evenement
+Route::get('/', [EvenementController::class, 'create'])->name('evenement.create');
+// Creation d'un Evenement
+Route::post('/store/evenement', [EvenementController::class, 'store'])->middleware('auth:association')->name('evenement.store');
+
+// Page presentatin qui list les evenements
+Route::get('/evenement/liste', [EvenementController::class, 'index'])->name('evenement.list');
+// Page presentatin qui list les evenements
+Route::get('/evenement/detail/{evenement}', [EvenementController::class, 'show'])->name('evenement.detail');

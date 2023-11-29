@@ -42,4 +42,12 @@ class Association extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Methode for specifie that An Association can publish many events
+     */
+    public function evenements()
+    {
+        return $this->hasMany(Evenement::class);
+    }
 }
