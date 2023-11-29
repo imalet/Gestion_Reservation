@@ -27,14 +27,14 @@ Route::post('/create/association', [AuthController::class, 'storeAssociation'])-
 
 // Page de Login
 Route::get('/login', [AuthController::class, 'login'])->name('login.authentification');
-Route::post('/authentification', [AuthController::class, 'authentification'])->name('login.authentification');
+Route::post('/authentification', [AuthController::class, 'authentification'])->name('authentification');
 
 // Page Welcome
 Route::get('/welcome', function(){
     return view('welcome');
-})->middleware('auth')->name('welcome');
+})->middleware('auth:web')->name('welcome');
 
 Route::get('/logout', function(){
-    Auth::logout();
+    Auth::guard('association')->logout();
     return redirect('/login');
 });

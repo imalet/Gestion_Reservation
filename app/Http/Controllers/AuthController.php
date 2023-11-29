@@ -34,24 +34,31 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        $association = Association::where('email', $request->email)->first();
-
-        if ($request->status === 'user') {
-            if (Auth::attempt($credentials)) {
-
-                $request->session()->regenerate();
-                return redirect()->route('welcome');
-            }
-            return back();
+        if (Auth::guard('association')->attempt($credentials)) {
+            return redirect()->route('welcome');
+        } elseif (Auth::guard('web')->attempt($credentials)) {
+            return redirect()->route('welcome');
         } else {
-
-            if ($association && Hash::check($request->password, $association->password)) {
-                $request->session()->regenerate();
-                return redirect()->route('welcome');
-            } else {
-                return back();
-            }
+            dd("Bad");
         }
+
+
+        // if ($request->status === 'user') {
+        //     if (Auth::attempt($credentials)) {
+
+        //         $request->session()->regenerate();
+        //         return redirect()->route('welcome');
+        //     }
+        //     return back();
+        // } else {
+
+        //     if ($association && Hash::check($request->password, $association->password)) {
+        //         $request->session()->regenerate();
+        //         return redirect()->route('welcome');
+        //     } else {
+        //         return back();
+        //     }
+        // }
     }
 
 
@@ -97,7 +104,7 @@ class AuthController extends Controller
         // dd($request->logo->extension());
 
         $fileName = time() . '.' . $request->logo->extension();
-        
+
 
         $image = $request->file('logo')->storeAs(
             'logo',

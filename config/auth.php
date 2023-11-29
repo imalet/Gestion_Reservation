@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Association;
+
 return [
 
     /*
@@ -16,6 +18,10 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+    ],
+    'defaults' => [
+        'driver' => 'eloquent',
+        'model' => Association::class,
     ],
 
     /*
@@ -40,6 +46,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'association' => [
+            'driver' => 'session',
+            'provider' => 'associations',
+        ],
     ],
 
     /*
@@ -63,6 +73,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'associations' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Association::class,
         ],
 
         // 'users' => [
@@ -97,6 +112,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'associations' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Association::class,
+        ],
+
     ],
 
     /*
