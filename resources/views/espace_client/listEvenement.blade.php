@@ -11,6 +11,7 @@
     @foreach ($evenements as $evenement)
         <h2>{{ $evenement->libelle }}</h2>
         <a href="{{ route('client.reservation.form',['evenement'=>$evenement->id]) }}">Reserver</a>
+        <a href="{{ route('evenement.detail',['evenement'=>$evenement->id]) }}">Detail Evenement</a> <br>
     @endforeach
 </body>
 </html>

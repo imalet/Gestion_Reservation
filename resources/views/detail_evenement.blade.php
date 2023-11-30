@@ -12,8 +12,12 @@
 
 
     <h1>{{ $evenement->libelle }}</h1>
+    @if (!Auth::guard('web'))
     <a href="{{route('evenement.edit',['evenement'=>$evenement->id])}}">Modifier</a>
     <a href="{{ route('evenement.destroy',['evenement'=>$evenement->id]) }}">Spprimer</a>
+    @else
+    <a href="{{ route('client.reservation.form',['evenement'=>$evenement->id]) }}">Reserver</a>
+    @endif
 
 </body>
 
