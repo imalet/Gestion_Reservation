@@ -16,4 +16,10 @@ class Evenement extends Model
     {
         return $this->belongsTo(Association::class);
     }
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
 }

@@ -12,7 +12,8 @@
 
 
     <h1>{{ $evenement->libelle }}</h1>
-    @if (!Auth::guard('web'))
+
+    @if (Auth::guard('association')->check())
     <a href="{{route('evenement.edit',['evenement'=>$evenement->id])}}">Modifier</a>
     <a href="{{ route('evenement.destroy',['evenement'=>$evenement->id]) }}">Spprimer</a>
     @else

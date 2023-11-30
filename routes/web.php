@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\ReservationController;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +63,7 @@ Route::post('/evenement/modifier/{evenement}', [EvenementController::class, 'upd
 // Supprimer d'un Evenement
 Route::get('/evenement/modifier/{evenement}', [EvenementController::class, 'destroy'])->name('evenement.destroy');
 
-// Partie reservé aux Reservation
+// Partie reservé aux action du client lies a une Reservation
 
 // Listing des reservations
 Route::get('/evenements',[ClientController::class, 'index'])->name('client.evenements.liste');
@@ -69,3 +71,8 @@ Route::get('/evenements',[ClientController::class, 'index'])->name('client.evene
 Route::get('/reservation/evenement/{evenement}',[ClientController::class, 'createReservation'])->name('client.reservation.form');
 // Formulaire de reservation
 Route::post('/confirmation/reservation/evenement',[ClientController::class, 'storeReservation'])->name('client.reservation.confirmation');
+
+// Partie reservé aux actions que peuvent faire les associations lies a une Reservation
+Route::get('/association/reservations',[ReservationController::class, 'index'])->name('association.reservations.liste');
+// Route permettant a une Association d'accepter ou de decliner une reservation
+Route::get('/reservvation/decline/{reservation}/{etat}',[ReservationController::class, 'update'])->name('association.reservation.update');
