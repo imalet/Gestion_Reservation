@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EvenementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,12 +43,12 @@ Route::get('/logout', function(){
 });
 
 // Formulaire Ajout d'un evenement
-Route::get('/', [EvenementController::class, 'create'])->name('evenement.create');
+Route::get('/ajout/evenement', [EvenementController::class, 'create'])->name('evenement.create');
 // Creation d'un Evenement
 Route::post('/store/evenement', [EvenementController::class, 'store'])->middleware('auth:association')->name('evenement.store');
 
-// Page presentatin qui list les evenements
-Route::get('/evenement/liste', [EvenementController::class, 'index'])->name('evenement.list');
+// Page presentation qui liste les evenements d'une associations
+Route::get('/association/evenement/liste', [EvenementController::class, 'index'])->name('evenement.list');
 
 // Page presentation detail d'un evenements
 Route::get('/evenement/detail/{evenement}', [EvenementController::class, 'show'])->name('evenement.detail');
@@ -58,3 +60,12 @@ Route::get('/evenement/{evenement}', [EvenementController::class, 'edit'])->name
 Route::post('/evenement/modifier/{evenement}', [EvenementController::class, 'update'])->name('evenement.update');
 // Supprimer d'un Evenement
 Route::get('/evenement/modifier/{evenement}', [EvenementController::class, 'destroy'])->name('evenement.destroy');
+
+// Partie reservé aux Reservation
+
+// Listing des reservations
+Route::get('/evenements',[ClientController::class, 'index'])->name('client.evenements.liste');
+// Formulaire de reservation
+Route::get('/reservation/evenement/{evenement}',[ClientController::class, 'createReservation'])->name('client.reservation.form');
+// Formulaire de reservation
+Route::post('/confirmation/reservation/evenement',[ClientController::class, 'storeReservation'])->name('client.reservation.confirmation');
