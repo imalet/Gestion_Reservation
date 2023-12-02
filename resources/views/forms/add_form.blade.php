@@ -17,25 +17,38 @@
             <a href="/">Retoure</a> / Publier un Evenemenet
         </div>
         <form action="{{ route('evenement.store') }}" method="post" enctype="multipart/form-data">
-           @csrf
+            @csrf
             <div
                 class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
 
 
                 {{-- Libelle de l'Evenement --}}
                 <input class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellcheck="false"
-                    placeholder="Libelle de l'Evenement..." type="text" name="libelle">
+                    placeholder="Libelle de l'Evenement..." type="text" value="{{ old('libelle') }}" name="libelle">
+
+                @error('libelle')
+                {{ $message }}
+                @enderror
 
                 {{-- Date de limite l'Inscription --}}
                 <label class="text-gray-600 dark:text-gray-400 mb-2">Date de limite des Inscriptions
                 </label>
                 <input class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellcheck="false"
-                    placeholder="Date limite des Inscription" type="date" name="date_limite_inscription">
+                    placeholder="Date limite des Inscription" type="date" value="{{ old('date_limite_inscription') }}"
+                    name="date_limite_inscription">
+
+                @error('date_limite_inscription')
+                {{ $message }}
+                @enderror
 
                 {{-- Description de l'Evenement--}}
                 <textarea class="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none"
                     spellcheck="false" placeholder="Décrivez tout ce qu’il faut savoir sur cet article ici..."
-                    name="description"></textarea>
+                    name="description" value="{{ old('description') }}"></textarea>
+
+                @error('description')
+                {{ $message }}
+                @enderror
 
                 {{-- Image --}}
                 <div class="border border-gray-300 bg-gray-50 p-4 mt-4">
@@ -47,22 +60,34 @@
                         </svg>
                         <span class="text-gray-600 font-medium">Upload file</span>
                     </label>
-                    <input id="upload" type="file" class="hidden" name="path_image" />
+                    <input id="upload" type="file" class="hidden" value="{{ old('path_image') }}" name="path_image" />
+
+                    @error('path_image')
+                    {{ $message }}
+                    @enderror
+
                 </div>
 
                 {{-- Est cloture ou pas --}}
                 <label class="text-gray-600 dark:text-gray-400 mt-4">l'Evenement est cloture ou pas ?
                 </label>
                 <select id="" class="bg-gray-100 border border-gray-300 p-2 mt-2  outline-none"
-                    name="est_cloture_ou_pas">
+                    name="est_cloture_ou_pas" value="{{ old('est_cloture_ou_pas') }}">
                     <option selected class="text-slate-400" aria-placeholder="">Est Cloture ou pas ?</option>
                     <option value="cloture">Cloture</option>
                     <option selected value="pas cloture">Pas Cloture</option>
                 </select>
+                @error('est_cloture_ou_pas')
+                {{ $message }}
+                @enderror
 
                 {{-- Date de l'evenement --}}
                 <input class="title bg-gray-100 border border-gray-300 p-2 my-4 outline-none" spellcheck="false"
-                    type="date" name="date_evenement">
+                    type="date" name="date_evenement" value="{{ old('date_evenement') }}">
+
+                @error('date_evenement')
+                {{ $message }}
+                @enderror
 
                 <!-- icons -->
                 <div class="icons flex text-gray-500 m-2">
