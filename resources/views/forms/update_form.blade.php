@@ -12,8 +12,7 @@
 </head>
 
 <body>
-    <div class="bg-white p-4 py-8">
-        <div class="heading text-center font-bold text-2xl m-5 text-gray-800 bg-white">Publier un Evenemenet</div>
+    
 
         <form action="{{ route('evenement.update',['evenement'=>$evenement->id]) }}" method="post" enctype="multipart/form-data">
             @csrf

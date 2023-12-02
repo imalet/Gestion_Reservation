@@ -35,44 +35,52 @@ Route::get('/login', [AuthController::class, 'login'])->name('login.authentifica
 Route::post('/authentification', [AuthController::class, 'authentification'])->name('authentification');
 
 // Page Welcome
-Route::get('/welcome', function(){
+Route::get('/welcome', function () {
     return view('welcome');
 })->middleware('auth:association')->name('welcome');
 
-Route::get('/logout', function(){
+Route::get('/logout', function () {
+    if (Auth::guard('association')->check()) {
+        Auth::guard('association')->logout();
+    } elseif(Auth::guard('web')->check()) {
+        Auth::guard('web')->logout();
+    }
+    
     Auth::guard('association')->logout();
     return redirect('/login');
 });
 
 // Formulaire Ajout d'un evenement
-Route::get('/ajout/evenement', [EvenementController::class, 'create'])->name('evenement.create');
+Route::get('/ajout/evenement', [EvenementController::class, 'create'])->middleware('auth:association')->name('evenement.create');
 // Creation d'un Evenement
 Route::post('/store/evenement', [EvenementController::class, 'store'])->middleware('auth:association')->name('evenement.store');
 
-// Page presentation qui liste les evenements d'une associations
+// Page presentation qui liste les evenements des associations
 Route::get('/association/evenement/liste', [EvenementController::class, 'index'])->name('evenement.list');
+// Route::get('/association/evenement/liste', [EvenementController::class, 'index'])->name('evenement.list');
 
 // Page presentation detail d'un evenements
 Route::get('/evenement/detail/{evenement}', [EvenementController::class, 'show'])->name('evenement.detail');
 
 // Formulaire de Modification d'un evenement
-Route::get('/evenement/{evenement}', [EvenementController::class, 'edit'])->name('evenement.edit');
+Route::get('/evenement/{evenement}', [EvenementController::class, 'edit'])->middleware('auth:association')->name('evenement.edit');
 // Route::get('/evenement/modifier/{evenement}', [EvenementController::class, 'edit'])->name('modifier');
 // Modification d'un Evenement
-Route::post('/evenement/modifier/{evenement}', [EvenementController::class, 'update'])->name('evenement.update');
+Route::post('/evenement/modifier/{evenement}', [EvenementController::class, 'update'])->middleware('auth:association')->name('evenement.update');
 // Supprimer d'un Evenement
-Route::get('/evenement/modifier/{evenement}', [EvenementController::class, 'destroy'])->name('evenement.destroy');
+Route::get('/evenement/supprimer/{evenement}', [EvenementController::class, 'destroy'])->middleware('auth:association')->name('evenement.destroy');
 
 // Partie reservé aux action du client lies a une Reservation
 
 // Listing des reservations
-Route::get('/evenements',[ClientController::class, 'index'])->name('client.evenements.liste');
+// Route::get('/evenements', [ClientController::class, 'index'])->name('client.evenements.liste');
+Route::get('/', [ClientController::class, 'index'])->name('evenements.liste');
 // Formulaire de reservation
-Route::get('/reservation/evenement/{evenement}',[ClientController::class, 'createReservation'])->name('client.reservation.form');
+Route::get('/reservation/evenement/{evenement}', [ClientController::class, 'createReservation'])->middleware('auth:web')->name('client.reservation.form');
 // Formulaire de reservation
-Route::post('/confirmation/reservation/evenement',[ClientController::class, 'storeReservation'])->name('client.reservation.confirmation');
+Route::post('/confirmation/reservation/evenement', [ClientController::class, 'storeReservation'])->middleware('auth:web')->name('client.reservation.confirmation');
 
 // Partie reservé aux actions que peuvent faire les associations lies a une Reservation
-Route::get('/association/reservations',[ReservationController::class, 'index'])->name('association.reservations.liste');
+Route::get('/association/reservations', [ReservationController::class, 'index'])->middleware('auth:association')->name('association.reservations.liste');
 // Route permettant a une Association d'accepter ou de decliner une reservation
-Route::get('/reservvation/decline/{reservation}/{etat}',[ReservationController::class, 'update'])->name('association.reservation.update');
+Route::get('/reservation/decline/{reservation}/{etat}', [ReservationController::class, 'update'])->middleware('auth:association')->name('association.reservation.update');

@@ -9,6 +9,8 @@ class Evenement extends Model
 {
     use HasFactory;
 
+   
+
     /**
      * Methode for specifie that An Events belongs to a Association
      */

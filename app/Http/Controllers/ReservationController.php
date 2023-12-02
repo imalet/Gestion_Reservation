@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -12,7 +14,9 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::All();
+        $nbrParticipant = 0;
+        
         // $autre = Reservation::with('user', 'evenement');
         return view('espace_association.liste_reservation',compact('reservations'));
     }

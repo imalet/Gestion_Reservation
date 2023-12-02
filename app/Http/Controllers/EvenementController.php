@@ -6,6 +6,7 @@ use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class EvenementController extends Controller
 {
@@ -14,7 +15,8 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        $evenements = Evenement::all();
+        $evenements = Evenement::where('association_id', Auth::guard('association')->user()->id)->get();
+
         return view('home', compact('evenements'));
     }
 
@@ -66,6 +68,9 @@ class EvenementController extends Controller
      */
     public function edit(Evenement $evenement)
     {
+        if (Gate::denies('update-evenement', $evenement)) {
+            return back();
+        }
         return view('forms.update_form', compact('evenement'));
     }
 
@@ -74,6 +79,7 @@ class EvenementController extends Controller
      */
     public function update(Request $request, Evenement $evenement)
     {
+
 
         if ($request->hasFile($request->path_image)) {
             $fileName = time() . "." . $request->path_image->extension();

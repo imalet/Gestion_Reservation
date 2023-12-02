@@ -15,7 +15,7 @@ class ClientController extends Controller
     public function index()
     {
         $evenements = Evenement::where('est_cloture_ou_pas', 'pas cloture')->get();
-        return view('espace_client.listEvenement', compact('evenements'));
+        return view('home', compact('evenements'));
     }
 
     /**
@@ -37,7 +37,7 @@ class ClientController extends Controller
         $reservation->evenement_id = $request->evenement_id;
         $reservation->save();
 
-        return redirect()->route('client.evenements.liste');
+        return redirect()->route('evenements.liste');
     }
 
     /**

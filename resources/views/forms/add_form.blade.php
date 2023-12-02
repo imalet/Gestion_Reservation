@@ -13,10 +13,11 @@
 
 <body>
     <div class="bg-white p-4 py-8">
-        <div class="heading text-center font-bold text-2xl m-5 text-gray-800 bg-white">Publier un Evenemenet</div>
-
+        <div class="heading text-center font-bold text-2xl m-5 text-gray-800 bg-white">
+            <a href="/">Retoure</a> / Publier un Evenemenet
+        </div>
         <form action="{{ route('evenement.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
+           @csrf
             <div
                 class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
 
@@ -55,8 +56,8 @@
                 <select id="" class="bg-gray-100 border border-gray-300 p-2 mt-2  outline-none"
                     name="est_cloture_ou_pas">
                     <option selected class="text-slate-400" aria-placeholder="">Est Cloture ou pas ?</option>
-                    <option value="cloture">Occupe</option>
-                    <option selected value="pas cloture">En Cours</option>
+                    <option value="cloture">Cloture</option>
+                    <option selected value="pas cloture">Pas Cloture</option>
                 </select>
 
                 {{-- Date de l'evenement --}}

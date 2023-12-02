@@ -39,7 +39,7 @@ class AuthController extends Controller
             return redirect()->route('welcome');
         } elseif (Auth::guard('web')->attempt($credentials)) {
     
-            return redirect()->route('client.evenements.liste');
+            return redirect('/');
         } else {
             dd("Bad");
         }
