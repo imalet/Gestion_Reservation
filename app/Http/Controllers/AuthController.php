@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssociationRequest;
+use App\Http\Requests\ClientRequest;
+use App\Http\Requests\loginRequest;
 use App\Models\Association;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\loginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -83,30 +85,33 @@ class AuthController extends Controller
     /**
      * Store a newly created user resource in storage.
      */
-    public function storeUser(Request $request)
+    public function storeUser(ClientRequest $request)
     {
 
+        $credentials = $request->validated();
+
         $newUser = new User();
-        $newUser->firstName = $request->firstName;
-        $newUser->lastName = $request->firstName;
-        $newUser->email = $request->email;
-        $newUser->phoneNumber = $request->phoneNumber;
-        $newUser->password = $request->password;
+        $newUser->firstName = $credentials['firstName'];
+        $newUser->lastName = $credentials['firstName'];
+        $newUser->email = $credentials['email'];
+        $newUser->phoneNumber = $credentials['phoneNumber'];
+        $newUser->password = Hash::make($credentials['password']);
 
         $newUser->save();
 
-        return back();
+        return redirect()->route('login.authentification');
     }
 
     /**
      * Store a newly created user resource in storage.
      */
-    public function storeAssociation(Request $request)
+    public function storeAssociation(AssociationRequest $request)
     {
-        // dd($request->logo->extension());
+ 
 
+        $credentials = $request->validated();
+        
         $fileName = time() . '.' . $request->logo->extension();
-
 
         $image = $request->file('logo')->storeAs(
             'logo',
@@ -115,15 +120,15 @@ class AuthController extends Controller
         );
 
         $newUser = new Association();
-        $newUser->name = $request->name;
-        $newUser->slogan = $request->slogan;
+        $newUser->name = $credentials['name'];
+        $newUser->slogan = $credentials['slogan'];
         $newUser->logo = $image;
-        $newUser->email = $request->email;
-        $newUser->password = Hash::make($request->password);
+        $newUser->email = $credentials['email'];
+        $newUser->password = Hash::make($credentials['password']);
 
         $newUser->save();
 
-        return back();
+        return redirect()->route('login.authentification');
     }
 
     /**
