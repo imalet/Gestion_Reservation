@@ -64,7 +64,7 @@
 
                         @if (!Auth::guard('association')->check())
                         <a href="{{ route('client.reservation.form',['evenement'=>$evenement->id]) }}"
-                            class="text-sm font-medium text-green-500"><span>+</span>Reserver une place</a>
+                            class="text-sm font-medium text-green-500"><span>+</span>Reserver</a>
                         {{-- <a href="{{ route('evenement.destroy',['evenement'=>$evenement->id]) }}"
                             class="text-sm font-medium text-red-500"><span>+</span>Corbeille</a> --}}
                         

@@ -27,9 +27,13 @@
                             Email address
                         </label>
                         <div class="mt-1 relative rounded-md shadow-sm">
-                            <input id="email" name="email" placeholder="imalet@example.com" type="email" required=""
-                                value="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5
-                    ">
+                            <input id="email" name="email" placeholder="imalet@example.com" type="email" required
+                                value="{{ old('email') }}"
+                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            @error('email')
+                            {{ $message }}
+                            @enderror
+
                             <div class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
@@ -45,9 +49,13 @@
                             Password
                         </label>
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="password" name="password" type="password" placeholder="#2$egDf..." 
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" value="">
-                                
+                            <input id="password" name="password" type="password" placeholder="#2$egDf..."
+                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                value="{{ old('password') }}">
+                            @error('password')
+                            {{ $message }}
+                            @enderror
+
                         </div>
                     </div>
 
