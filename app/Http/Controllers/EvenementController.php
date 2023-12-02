@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EmailConfirmationReservation;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class EvenementController extends Controller
 {
@@ -51,6 +53,10 @@ class EvenementController extends Controller
             "date_evenement" => $request->date_evenement,
             "association_id" => Auth::guard('association')->user()->id,
         ]);
+
+        $email = "benji@gmail.com";
+
+        Mail::to('imaletbenji@gmail.com')->send(new EmailConfirmationReservation());
 
         return back();
     }
