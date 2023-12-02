@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EvenementRequest;
 use App\Mail\EmailConfirmationReservation;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
@@ -33,8 +34,10 @@ class EvenementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EvenementRequest $request)
     {
+
+        $credentials = $request->validated();
 
         $fileName = time() . "." . $request->file('path_image')->extension();
 
@@ -45,20 +48,18 @@ class EvenementController extends Controller
         );
 
         DB::table('evenements')->insert([
-            "libelle" => $request->libelle,
-            "date_limite_inscription" => $request->date_limite_inscription,
-            "description" => $request->description,
+            "libelle" => $credentials['libelle'],
+            "date_limite_inscription" => $credentials['date_limite_inscription'],
+            "description" => $credentials['description'],
             "path_image" => $image,
-            "est_cloture_ou_pas" => $request->est_cloture_ou_pas,
-            "date_evenement" => $request->date_evenement,
+            "est_cloture_ou_pas" => $credentials['est_cloture_ou_pas'],
+            "date_evenement" => $credentials['date_evenement'],
             "association_id" => Auth::guard('association')->user()->id,
         ]);
 
-        $email = "benji@gmail.com";
-
         Mail::to('imaletbenji@gmail.com')->send(new EmailConfirmationReservation());
 
-        return back();
+        return redirect('/');
     }
 
     /**
